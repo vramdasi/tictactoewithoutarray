@@ -15,9 +15,11 @@ function App() {
   const [currentPlayer, setCurrentPlayer] = useState("O");
 
   const [winner, setWinner] = useState("no-winner");
+  const [boardfull, setBoardFull] = useState(false);
 
   useEffect(() => {
     calculateWinner();
+    isBoardFull();
     switchPlayer();
   }, [block0, block1, block2, block3, block4, block5, block6, block7, block8]);
 
@@ -65,6 +67,12 @@ function App() {
     }
   };
 
+  const isBoardFull = () => {
+    if(block0 != "" && block1 != "" && block2 != "" && block3 != "" && block4 != "" && block5 != "" && block6 != "" && block7 != "" && block8 != "" && winner === "no-winner"){
+      setBoardFull(true);
+    }
+  }
+  
   const switchPlayer = () => {
     console.log("winner is ", winner);
 
@@ -77,6 +85,14 @@ function App() {
   function toggleMark(event, key) {
     console.log("key ", key);
     console.log("currentPlayer ", currentPlayer);
+    
+    
+    if(boardfull){
+       alert("Match is draw");
+    return;   
+    }
+    
+    
     if (winner === "no-winner") {
       if (key === 0 && block0 === "") {
         setBlock0(currentPlayer);
