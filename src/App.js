@@ -75,8 +75,7 @@ function App() {
   
   const switchPlayer = () => {
     console.log("winner is ", winner);
-
-    if (winner === "no-winner") {
+    if (winner === "no-winner" && boardfull === false) {
       if (currentPlayer === "X") setCurrentPlayer("O");
       else setCurrentPlayer("X");
     }
@@ -84,14 +83,7 @@ function App() {
 
   function toggleMark(event, key) {
     console.log("key ", key);
-    console.log("currentPlayer ", currentPlayer);
-    
-    
-    if(boardfull){
-       alert("Match is draw");
-    return;   
-    }
-    
+    console.log("currentPlayer ", currentPlayer); 
     
     if (winner === "no-winner") {
       if (key === 0 && block0 === "") {
@@ -136,6 +128,9 @@ function App() {
     <div className="App">
       <h2>Tic-Tac-Toe</h2>
       <div className="">
+        
+        {boardfull === true ? <h2>Match is draw</h2> : null}
+    
         {winner === "no-winner" && currentPlayer === "X" ? (
           <h3>Current Player : X &nbsp;&nbsp;&nbsp; Current Player : O</h3>
         ) : null}
